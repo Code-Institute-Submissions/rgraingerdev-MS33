@@ -1,6 +1,45 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Contact</h1>
-    <p> Welcome to the home page!</p>
+      <div class="row">
+    <form class="col s12">
+        <h2>Have a question?</h2>
+        <p>Complete the below form and we will contact you ASAP</p>
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="icon_prefix" type="text" class="validate">
+          <label for="icon_prefix">First Name</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="icon_telephone" type="tel" class="validate">
+          <label>Surname</label>
+        </div>
+        <div class="row>">
+          <div class="input-field col s12">
+            <input id="email" type="email" class="validate">
+            <label for="email">Email</label>
+        </div>
+        </div>
+        <div class="row>">
+            <div class="input-field col s12">
+                <input id="subject" type="text" class="validate">
+                <label for="subject">Subject</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <input id="message" type="text" class="validate">
+                <label for="message">Message</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="button" col s6>
+                <button class="btn waves-effect waves-light" type="submit" name="action" style="margin-left: 35%">Submit
+                    <i class="material-icons right"></i>
+                </button>
+            </div>
+        </div>
+      </div>
+    </form>
+  </div>
 {% endblock %}
 ```
