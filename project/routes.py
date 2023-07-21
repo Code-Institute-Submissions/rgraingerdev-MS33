@@ -9,6 +9,10 @@ def home():
 def contact():
     return render_template("contact.html", contact=contact)
 
+@app.route("/idea3")
+def idea3():
+    return render_template("idea3.html", idea3=idea3)
+
 @app.route("/about")
 def about():
     return render_template("about.html", about=about)
