@@ -13,10 +13,6 @@ def contact():
 def idea3():
     return render_template("idea3.html", idea3=idea3)
 
-@app.route("/about")
-def about():
-    return render_template("about.html", about=about)
-
 @app.route("/signin")
 def signin():
     return render_template("signin.html", signin=signin)
