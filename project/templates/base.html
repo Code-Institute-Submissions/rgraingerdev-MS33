@@ -5,14 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
-    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/style.css') }}" type="text/css">
     <title>Project Insert title here</title>
 </head>
 <body>
     <nav>
-        <div class="nav-wrapper">
-          <a href="home.html" class="brand-logo">Change me!!</a>
+        <div class="nav-wrapper blue darken-1">
+          <a href="home.html" class="brand-logo">Dev Book</a>
           <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons"><i class="filter_list">filter_list</i></i></a>
           <ul class="right hide-on-med-and-down">
             <li><a href={{ url_for('home') }}>Home</a></li>
@@ -33,12 +33,12 @@
         {% block content %}
         {% endblock %}
 
-    <footer class="page-footer">
+    <footer class="page-footer blue darken-1">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">
-                    <h5 class="white-text">Footer Content</h5>
-                    <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.
+                    <h5 class="white-text">Developer Booking</h5>
+                    <p class="grey-text text-lighten-4">Check us out on social media.
                     </p>
                 </div>
                 <div class="col l4 offset-l2 s12">
@@ -63,5 +63,6 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="{{ url_for('static', filename='JS/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='JS/calendar.js') }}"></script>
 </body>
 </html>

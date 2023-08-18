@@ -1,4 +1,4 @@
-from flask import render_template, url_for
+from flask import Flask, render_template, url_for, request, redirect
 from project import app, db
 
 @app.route("/")
@@ -13,6 +13,8 @@ def contact():
 def idea3():
     return render_template("idea3.html", idea3=idea3)
 
-@app.route("/signin")
+@app.route("/signin", methods=["GET", "POST"])
 def signin():
     return render_template("signin.html", signin=signin)
+
+
