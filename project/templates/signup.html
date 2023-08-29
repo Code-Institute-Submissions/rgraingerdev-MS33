@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+      <div class="col s12" style="text-align: center">
+          <h4>New Users</h4>
+          <form class="col s12" method="POST" action="/signin">
+      <div class="row">
+        <div class="input-field col s6">
+          <input id="fname" type="text" class="validate" name="fname" required>
+          <label for="fname">First Name</label>
+        </div>
+        <div class="input-field col s6">
+          <input id="sname" type="text" class="validate" name="sname" required>
+          <label for="last_name">Last Name</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="password" type="password" class="validate" name="password" required>
+          <label for="password">Password</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="email" type="email" class="validate" name="email" required>
+          <label for="email">Email</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <button type="submit"  value="signup"  class="waves-effect waves-light btn">Sign up</button>
+        </div>
+      </div>
+      </div>
+    </form>
+      </div>
+    </div>
+{% endblock %}
+```

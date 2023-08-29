@@ -1,7 +1,7 @@
 from flask import Flask, render_template, url_for, request, redirect
 from project import app, db
 from sqlalchemy import text
-from project.models import users
+
 
 @app.route("/")
 def home():
@@ -17,6 +17,10 @@ def idea3():
 
 @app.route("/signin", methods=["GET", "POST"])
 def signin():
+    return render_template("signin.html", title="Sign IN", signin = signin)
+
+@app.route("/signup", methods=["GET", "POST"])
+def signup():
     if request.method == "POST":
         fname = request.form.get("fname")
         sname = request.form.get("sname")
@@ -29,7 +33,7 @@ def signin():
         db.session.commit()
 
         return redirect(url_for("idea3"))
-    return render_template("signin.html", title="Sign Up", signin=signin)
+    return render_template("signup.html", title="Sign Up", signin=signin)
 
 
 @app.route('/test-connection')
@@ -39,5 +43,7 @@ def test_connection():
         return f"Connection successful! Total records: {count}"
     except Exception as e:
         return f"Connection failed: {str(e)}"
+    
+
 
 
