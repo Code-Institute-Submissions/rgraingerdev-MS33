@@ -8,3 +8,17 @@
   main {
     flex: 1 0 auto;
   }
+
+  body {
+    background: url("../images/heroimage.png") no-repeat center center fixed;
+  }
+
+  .landing {
+    font-family: 'Inter', sans-serif;
+    text-align: right;
+    font-size: 30px;
+    margin-top: 10px;
+    margin-bottom: 100px;
+    padding: 20px;
+
+  }
