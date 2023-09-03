@@ -11,9 +11,9 @@ def home():
 def contact():
     return render_template("contact.html", contact=contact)
 
-@app.route("/idea3")
-def idea3():
-    return render_template("idea3.html", idea3=idea3)
+@app.route("/messages")
+def messages():
+    return render_template("messages.html", messages=messages)
 
 @app.route("/signin", methods=["GET", "POST"])
 def signin():
@@ -32,7 +32,7 @@ def signup():
         db.session.add(new_user)
         db.session.commit()
 
-        return redirect(url_for("idea3"))
+        return redirect(url_for("messages"))
     return render_template("signup.html", title="Sign Up", signin=signin)
 
 
