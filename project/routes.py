@@ -15,6 +15,17 @@ def contact():
 def messages():
     return render_template("messages.html", messages=messages)
 
+@app.route("/create_message", methods=["GET", "POST"])
+def create_message():
+    if request.method == "POST":
+        content = request.form.get("content")
+        user = get_current_user()
+        new_message = messages(content=content, user=user)
+        db.session.add(new_message)
+        db.session.commit()
+        return redirect(url_for("messages"))
+    return render_template("create_message.html", create_message=create_message)
+
 @app.route("/signin", methods=["GET", "POST"])
 def signin():
     return render_template("signin.html", title="Sign IN", signin = signin)

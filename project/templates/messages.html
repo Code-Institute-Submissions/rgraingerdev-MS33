@@ -2,19 +2,7 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-6 Days">
-            <div class="row right">
-                <div class="col-6 right">
-                    <h3 class="right">Meet reviews</h3>
-                    <div class="comment-card">
-                        <div class="comment-header">
-                            <p class="comment-content">
-
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="col-6 center">
             <h3>Monday</h3>
             <p>Hackathon presentation 15:30-17:30</p>
             <img src=" ../static/images/presentation.jpeg " alt="presentation" class="image">
@@ -27,9 +15,22 @@
             <h3>Friday</h3>
             <p>Hackathon planning 15:30-17:30</p>
             <img src="../static/images/planning.png" alt="planning" class="image">
+            </div>
         </div>
-        </div>
+        <div class="container">
+            <div class="row col-6">
+                <form method="POST" action="/create_message" class="col s12 center-align">
+                <div class="row">
+                    <div class="input-field col s12">
+                        <textarea id="content" name="content" class="materialize-textarea"></textarea>
+                        <label for="content">Enter your message</label>
+                        <input type="submit" value="Post message" class="btn btn-primary">
+                    </div>
+                </div>
+                </form>
+            </div>
     </div>
 </div>
+
 
 {% endblock %}
