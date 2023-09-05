@@ -29,3 +29,28 @@
     height: 50%;
     border-radius: 25PX;
   }
+
+  .favicon {
+    margin-right: 5px;
+  }
+
+  .comment-card {
+    background-color: deepskyblue;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 25px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+  }
+
+  .comment-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+
+  comment-content {
+    font-size: 16px;
+    line-height: 1.4;
+  }
