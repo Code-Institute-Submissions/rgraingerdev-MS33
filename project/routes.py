@@ -1,7 +1,10 @@
-from flask import Flask, render_template, url_for, request, redirect
+from flask import Flask, render_template, url_for, request, redirect, flash
+from flask_login import login_user, logout_user, LoginManager, current_user
 from project import app, db
 from sqlalchemy import text
-
+from project.models import users, message
+login_manager = LoginManager()
+login_manager.login_view = 'signin'
 
 @app.route("/")
 def home():
@@ -26,8 +29,24 @@ def create_message():
         return redirect(url_for("messages"))
     return render_template("create_message.html", create_message=create_message)
 
+@login_manager.user_loader
+def load_user(user_id):
+    return users.query.get(int(user_id))
 @app.route("/signin", methods=["GET", "POST"])
 def signin():
+    if request.method == "POST":
+        email = request.form.get("email")
+        password = request.form.get("password")
+
+        user = users.query.filter_by(email=email).first()
+        if email and user.check_password(password):
+            login_user(user)
+
+            return redirect(url_for("messages"))
+        else:
+            flash("invalid credentials", "error")
+            return redirect(url_for("signin"))
+
     return render_template("signin.html", title="Sign IN", signin = signin)
 
 @app.route("/signup", methods=["GET", "POST"])
