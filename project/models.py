@@ -19,7 +19,13 @@ class users(db.Model):
     def check_password(self, password):
         return bcrypt.checkpw(password.encode('utf-8'), self.password_hash.encode('utf-8'))
 
-
+class contact(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    fname = db.Column(db.String(20), nullable=False)
+    sname = db.Column(db.String(20), nullable=False)
+    email = db.Column(db.String(120), unique = True, nullable=False)
+    subject = db.Column(db.String(60), nullable=False)
+    message = db.Column(db.Text, nullable = False)
 
 class message(db.Model):
     id = db.Column(db.Integer, primary_key=True)

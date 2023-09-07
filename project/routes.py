@@ -3,7 +3,7 @@ from flask_login import login_user, logout_user, LoginManager, current_user
 from project import app, db
 from sqlalchemy import text
 from project.models import users, message
-login_manager = LoginManager()
+login_manager = LoginManager(app)
 login_manager.login_view = 'signin'
 
 @app.route("/")
@@ -22,7 +22,7 @@ def messages():
 def create_message():
     if request.method == "POST":
         content = request.form.get("content")
-        user = get_current_user()
+        user = current_user()
         new_message = messages(content=content, user=user)
         db.session.add(new_message)
         db.session.commit()
@@ -32,6 +32,7 @@ def create_message():
 @login_manager.user_loader
 def load_user(user_id):
     return users.query.get(int(user_id))
+
 @app.route("/signin", methods=["GET", "POST"])
 def signin():
     if request.method == "POST":
