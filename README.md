@@ -99,7 +99,7 @@ Testing began with automated testing as per the table below with screenshots.
 
 | Feature | Expect | Action | Result | Pass/Fail |
 |-----|-----|-----|-----|-----|
-|Enter button| To navigate to history page | clicked the enter button | Opened history page correctly | Pass |
+|Enter button| To navigate to history page | clicked the enter button | Opened history page correctly | |
 |Nav links | When clicked navigate to page | Clicked all nav links on all pages| All pages opened as expected| Pass
 |Social link icons | Social link icons to open links in new tab| clicked social link icons| Link opened in new tab and on correct site| Pass|
 |Menu Drop down | To drop down on mobile and tablet devices | opened on mutiple devices and pressed button | menu droped and displayed correctly| Pass|
