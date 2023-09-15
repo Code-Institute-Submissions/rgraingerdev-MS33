@@ -1,5 +1,6 @@
 from project import db
-from flask_login import UserMixin
+from flask import Flask
+from flask_login import UserMixin, LoginManager
 import bcrypt
 import sqlalchemy
 from datetime import datetime
