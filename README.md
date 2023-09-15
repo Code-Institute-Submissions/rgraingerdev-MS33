@@ -50,7 +50,7 @@ By developing user stories, I can make sure that the website satisfies user need
 * CSS - was used for the style of elements.
 * Python - Was used to add to create backend tables and interactivity.
 * SQLalchemy - used for creating tables to store user information.
-
+* ElephantSQL - Used to manage tables
 * Github - is the hosting site for storing the code and version control.
 * Heroku - was used to deploy the site.
 * balsamiq - used for wireframes.
@@ -77,9 +77,9 @@ Testing began with automated testing as per the table below with screenshots.
 |Test |Lighthouse| W3 html validator| W3 schools jigsaw| 
 |-----|-----|-----|-----|
 |home| Pass| Pass| Pass|
-|History| Pass| Pass| Pass|
-|Season| Pass| Pass| Pass|
-|Contact| Pass | Pass| Pass|
+|About| Pass| Pass| Pass|
+|Contact| Pass| Pass| Pass|
+|Sign in| Pass | Pass| Pass|
 
 ![Home](assets/Screenshots/validator_home.png)  
 
@@ -192,7 +192,7 @@ Bugs found during writing have been fixed.
 5. Press Enter to create your local clone.
 
 ## Sources
-
+none
 
 ### images from:
 
