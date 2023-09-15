@@ -7,7 +7,7 @@ Welcome To the Developer Friends Page, The Developer friends and everything it s
 Visit https://rgraingerdev.github.io/MS£/ on your preferred web browser to access the Developer friends Page. The website is completely responsive; regardless of whether you're using a desktop computer, tablet or smartphone, it should look excellent on all of them.
 
 ## User Storys
-I have developed user stories to direct my design and development process; in order to make sure that the CCFC Fan Page satisfies the requirements of my users. Here are some usage examples for user stories:
+I have developed user stories to direct my design and development process; in order to make sure that the Developer friends Page satisfies the requirements of my users. Here are some usage examples for user stories:
 
 
 * As a developer i want a way to broaden my development skills.

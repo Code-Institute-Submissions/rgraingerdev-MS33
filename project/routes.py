@@ -1,12 +1,10 @@
 from flask import Flask, render_template, url_for, request, redirect, flash
-from flask_login import login_user, logout_user, LoginManager, current_user
+from flask_login import login_user, logout_user, LoginManager, current_user, UserMixin
 from project import app, db
 from sqlalchemy import text
 from project.models import users, message
-from werkzeug.security import check_password_hash
 login_manager = LoginManager(app)
 login_manager.login_view = 'signin'
-
 
 @app.route("/")
 def home():
@@ -39,14 +37,11 @@ def load_user(user_id):
 def signin():
     if request.method == "POST":
         user = users.query.filter_by(email=request.form['email']).first()
-
-        if user and check_password_hash(user.password_hash, request.form['password']):
+        if user and users.check_password(password=request.form['password']):
             login_user(user)
-            flash('Login successful!', 'success')
-            return redirect(url_for("/messages"))
+            return redirect(url_for("messages"))
 
         flash("invalid credentials", "danger")
-        return redirect(url_for("signin"))
 
     return render_template("signin.html", title="Sign IN", signin = signin)
 
@@ -74,7 +69,7 @@ def logout():
 @app.route('/test-connection')
 def test_connection():
     try:
-        count = text('SELECT COUNT(*) FROM users')
+        count = text('SELECT * FROM users')
         return f"Connection successful! Total records: {count}"
     except Exception as e:
         return f"Connection failed: {str(e)}"

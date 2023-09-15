@@ -1,14 +1,6 @@
 from project import db
-from flask import Flask
 from flask_login import UserMixin, LoginManager
 import bcrypt
-import sqlalchemy
-from datetime import datetime
-from sqlalchemy.orm import relationship, lazyload
-from sqlalchemy.ext.declarative import declarative_base
-
-
-
 class users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     fname = db.Column(db.String(20), nullable=False)
