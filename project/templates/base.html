@@ -21,7 +21,11 @@
             <li><a href={{ url_for('home') }}>Home</a></li>
             <li><a href={{ url_for('messages') }}>Messages</a></li>
             <li><a href={{ url_for('contact') }}>Contact</a></li>
-            <li><a href={{ url_for('signin') }}>Sign in</a></li>
+            {% if current_user.is_authenticated %}
+                <li><a href={{ url_for('logout') }}>Logout</a></li>
+            {% else %}
+                <li><a href={{ url_for('signin') }}>Sign in</a></li>
+            {% endif %}
           </ul>
         </div>
       </nav>
@@ -30,7 +34,11 @@
         <li><a href={{ url_for('home') }}>Home</a></li>
         <li><a href={{ url_for('messages') }}>Messages</a></li>
         <li><a href={{ url_for('contact') }}>Contact</a></li>
-        <li><a href={{ url_for('signin') }}>Sign in</a></li>
+        {% if current_user.is_authenticated %}
+                <li><a href={{ url_for('logout') }}>Logout</a></li>
+            {% else %}
+                <li><a href={{ url_for('signin') }}>Sign in</a></li>
+            {% endif %}
       </ul>
 
         {% block content %}

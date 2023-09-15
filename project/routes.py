@@ -3,8 +3,10 @@ from flask_login import login_user, logout_user, LoginManager, current_user
 from project import app, db
 from sqlalchemy import text
 from project.models import users, message
+from werkzeug.security import check_password_hash
 login_manager = LoginManager(app)
 login_manager.login_view = 'signin'
+
 
 @app.route("/")
 def home():
@@ -21,9 +23,9 @@ def messages():
 @app.route("/create_message", methods=["GET", "POST"])
 def create_message():
     if request.method == "POST":
-        content = request.form.get("content")
-        user = current_user()
-        new_message = messages(content=content, user=user)
+        content = request.form["content"]
+        user = current_user
+        new_message = message(content=content, user=user)
         db.session.add(new_message)
         db.session.commit()
         return redirect(url_for("messages"))
@@ -36,17 +38,15 @@ def load_user(user_id):
 @app.route("/signin", methods=["GET", "POST"])
 def signin():
     if request.method == "POST":
-        email = request.form.get("email")
-        password = request.form.get("password")
+        user = users.query.filter_by(email=request.form['email']).first()
 
-        user = users.query.filter_by(email=email).first()
-        if email and user.check_password(password):
+        if user and check_password_hash(user.password_hash, request.form['password']):
             login_user(user)
+            flash('Login successful!', 'success')
+            return redirect(url_for("/messages"))
 
-            return redirect(url_for("messages"))
-        else:
-            flash("invalid credentials", "error")
-            return redirect(url_for("signin"))
+        flash("invalid credentials", "danger")
+        return redirect(url_for("signin"))
 
     return render_template("signin.html", title="Sign IN", signin = signin)
 
@@ -66,6 +66,10 @@ def signup():
         return redirect(url_for("messages"))
     return render_template("signup.html", title="Sign Up", signin=signin)
 
+@app.route("/logout")
+def logout():
+    logout_user()
+    return redirect(url_for("home.html"))
 
 @app.route('/test-connection')
 def test_connection():

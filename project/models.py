@@ -1,12 +1,14 @@
 from project import db
+from flask_login import UserMixin
 import bcrypt
+import sqlalchemy
 from datetime import datetime
 from sqlalchemy.orm import relationship, lazyload
 from sqlalchemy.ext.declarative import declarative_base
 
 
 
-class users(db.Model):
+class users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     fname = db.Column(db.String(20), nullable=False)
     sname = db.Column(db.String(20), nullable=False)
@@ -29,9 +31,8 @@ class contact(db.Model):
 
 class message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    content = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
-    timestamp = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-    text = db.Column(db.Text, nullable = False)
 
     user = db.relationship('users', backref=db.backref('messages', lazy=True))
 
