@@ -2,7 +2,8 @@ from flask import Flask, render_template, url_for, request, redirect, flash
 from flask_login import login_user, logout_user, LoginManager, current_user, UserMixin
 from project import app, db
 from sqlalchemy import text
-from project.models import users, message
+from project.models import users, message, ContactMessage
+
 login_manager = LoginManager(app)
 login_manager.login_view = 'signin'
 
@@ -10,8 +11,18 @@ login_manager.login_view = 'signin'
 def home():
     return render_template("home.html", home=home)
 
-@app.route("/contact")
+@app.route("/contact", methods=["GET", "POST"])
 def contact():
+    if request.method == 'POST':
+        fname = request.form.get("fname")
+        sname = request.form.get("sname")
+        email = request.form.get("email")
+        subject = request.form.get("subject")
+        message = request.form.get("message")
+        new_message = ContactMessage(fname=fname, sname=sname, email=email, subject=subject, message=message)
+        db.session.add(new_message)
+        db.session.commit()
+
     return render_template("contact.html", contact=contact)
 
 @app.route("/messages")
@@ -37,7 +48,7 @@ def load_user(user_id):
 def signin():
     if request.method == "POST":
         user = users.query.filter_by(email=request.form['email']).first()
-        if user and users.check_password(password=request.form['password']):
+        if user and user.check_password(input_password=request.form['password']):
             login_user(user)
             return redirect(url_for("messages"))
 

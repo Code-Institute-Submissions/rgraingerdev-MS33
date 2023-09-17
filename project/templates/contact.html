@@ -1,40 +1,39 @@
 {% extends "base.html" %}
 {% block content %}
       <div class="row">
+      <h2>Have a question?</h2>
+      <p>Complete the below form and we will contact you ASAP</p>
     <form method="POST" action="/contact" class="col s12">
-        <h2>Have a question?</h2>
-        <p>Complete the below form and we will contact you ASAP</p>
       <div class="row">
         <div class="input-field col s6">
-          <input id="icon_prefix fname" type="text" class="validate">
-          <label for="icon_prefix fname">First Name</label>
+          <input id="fname" type="text" name="fname" class="validate">
+          <label for="fname">First Name</label>
         </div>
         <div class="input-field col s6">
-          <input id="icon_telephone sname" type="tel" class="validate">
+          <input id="sname" type="tel" name="sname" class="validate">
           <label for="sname">Surname</label>
         </div>
         <div class="row>">
           <div class="input-field col s12">
-            <input id="email" type="email" class="validate">
+            <input id="email" type="email" name="email" class="validate">
             <label for="email">Email</label>
         </div>
         </div>
         <div class="row>">
             <div class="input-field col s12">
-                <input id="subject" type="text" class="validate">
+                <input id="subject" type="text" name="subject" class="validate">
                 <label for="subject">Subject</label>
             </div>
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <input id="message" type="text" class="validate">
+                <input id="message" type="text" name="message" class="validate">
                 <label for="message">Message</label>
             </div>
         </div>
         <div class="row">
             <div class="button" col s6>
-                <button class="btn waves-effect waves-light" type="submit" name="action" style="margin-left: 35%">Submit
-                    <i class="material-icons right"></i>
+                <input type="submit" value="Submit">
                 </button>
             </div>
         </div>
