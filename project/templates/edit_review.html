@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Edit review</h1>
+        <form method="post">
+            <div>
+                <label for="content" name="content">Review content:</label>
+                <textarea id="content" name="content" class="materialize-textarea" required>{{ review.content }}</textarea>
+            </div>
+            <div>
+                <input type="Submit" value="Submit" class="btn waves-effect waves-light">
+            </div>
+        </form>

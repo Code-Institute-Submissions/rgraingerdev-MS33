@@ -33,6 +33,33 @@ def contact():
 def timetable():
     return render_template("timetable.html", timetable=timetable)
 
+@app.route("/reviews")
+def display_reviews():
+    review = reviews.query.join(users).add_columns(users.fname, reviews.content).all()
+    return render_template("reviews.html", review=review)
+
+@app.route("/edit_review/<int:review_id>")
+def edit_review(review_id):
+    if request.method == 'POST':
+        new_content = request.form.get("content")
+        review = reviews.query.get(review_id)
+        review.content = new_content
+
+    review = reviews.get(review_id)
+    if review:
+        return render_template("edit_review.html", review=review)
+    else:
+        return f"Review with id={review_id} not found"
+    return render_template("edit_review.html", review=review)
+
+@app.route("/delete_review/<int:review_id>")
+def delete_review(review_id):
+    review = reviews.query.get_or_404(review_id)
+    db.session.delete(review)
+    db.session.commit()
+    return redirect(url_for("display_reviews"))
+
+
 @app.route("/create_message", methods=["GET", "POST"])
 def create_message():
     if request.method == 'POST':
@@ -86,7 +113,7 @@ def signin():
         if user and checkpw(password.encode('utf-8'), user.hashed_password.encode('utf-8')):
             login_user(user)
             flash("Login Successful", 'success')
-            return redirect(url_for("messages"))
+            return redirect(url_for("timetable"))
         flash("Login Unsuccessful", 'danger')
     return render_template("signin.html", title="Sign In", signin=signin)
             
