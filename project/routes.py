@@ -25,6 +25,11 @@ def contact():
 
     return render_template("contact.html", contact=contact)
 
+@app.route("/view_messages")
+def view_messages():
+    message = ContactMessage.query.all()
+    return render_template("view_messages.html", message=message)
+
 @app.route("/messages")
 def messages():
     return render_template("messages.html", messages=messages)
