@@ -1,8 +1,11 @@
 from flask import Flask, render_template, url_for, request, redirect, flash
 from flask_login import login_user, logout_user, LoginManager, current_user, UserMixin
+from flask_sqlalchemy import SQLAlchemy
 from project import app, db
 from sqlalchemy import text
 from project.models import users, message, ContactMessage
+import bcrypt
+from bcrypt import hashpw, gensalt, checkpw
 
 login_manager = LoginManager(app)
 login_manager.login_view = 'signin'
@@ -10,6 +13,17 @@ login_manager.login_view = 'signin'
 @app.route("/")
 def home():
     return render_template("home.html", home=home)
+
+@app.route("/create_message", methods=["GET", "POST"])
+def create_message():
+    if request.method == "POST":
+        content = request.form["content"]
+        user = current_user
+        new_message = message(content=content, user=user)
+        db.session.add(new_message)
+        db.session.commit()
+        return redirect(url_for("messages"))
+    return render_template("create_message.html", create_message=create_message)
 
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
@@ -25,57 +39,57 @@ def contact():
 
     return render_template("contact.html", contact=contact)
 
+
 @app.route("/view_messages")
 def view_messages():
-    message = ContactMessage.query.all()
-    return render_template("view_messages.html", message=message)
+    messages = ContactMessage.query.all()
+    return render_template("view_messages.html", messages=messages)
 
 @app.route("/messages")
 def messages():
     return render_template("messages.html", messages=messages)
 
-@app.route("/create_message", methods=["GET", "POST"])
-def create_message():
-    if request.method == "POST":
-        content = request.form["content"]
-        user = current_user
-        new_message = message(content=content, user=user)
-        db.session.add(new_message)
-        db.session.commit()
-        return redirect(url_for("messages"))
-    return render_template("create_message.html", create_message=create_message)
-
 @login_manager.user_loader
 def load_user(user_id):
     return users.query.get(int(user_id))
 
-@app.route("/signin", methods=["GET", "POST"])
-def signin():
-    if request.method == "POST":
-        user = users.query.filter_by(email=request.form['email']).first()
-        if user and user.check_password(input_password=request.form['password']):
-            login_user(user)
-            return redirect(url_for("messages"))
-
-        flash("invalid credentials", "danger")
-
-    return render_template("signin.html", title="Sign IN", signin = signin)
-
-@app.route("/signup", methods=["GET", "POST"])
+@app.route('/signup', methods=["GET", "POST"])
 def signup():
     if request.method == "POST":
         fname = request.form.get("fname")
         sname = request.form.get("sname")
-        password_hash = request.form.get("password")
         email = request.form.get("email")
+        password = request.form.get("password")
 
-        new_user = users(fname = fname, sname = sname, email = email)
-        new_user.set_password(password_hash)
+        pwhash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
+        hashed_password = pwhash.decode('utf-8')
+
+        new_user = users(fname=fname, sname=sname, email=email, hashed_password=hashed_password)
+
         db.session.add(new_user)
         db.session.commit()
 
-        return redirect(url_for("messages"))
-    return render_template("signup.html", title="Sign Up", signin=signin)
+        flash("Registration Successful", 'success')
+        return redirect(url_for("signin"))
+    
+    return render_template('signup.html', title="Sign Up", signup=signup)
+
+@app.route("/signin", methods=["GET", "POST"])
+def signin():
+    if request.method == "POST":
+        email = request.form.get("email")
+        password = request.form.get("password")
+
+        user = users.query.filter(users.email == email).first()
+
+        if user and checkpw(password.encode('utf-8'), user.hashed_password.encode('utf-8')):
+            login_user(user)
+            flash("Login Successful", 'success')
+            return redirect(url_for("messages"))
+        flash("Login Unsuccessful", 'danger')
+    return render_template("signin.html", title="Sign In", signin=signin)
+            
+
 
 @app.route("/logout")
 def logout():

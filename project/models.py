@@ -1,18 +1,18 @@
 from project import db
 from flask_login import UserMixin, LoginManager
+from flask_sqlalchemy import SQLAlchemy
 import bcrypt
+
+
 class users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     fname = db.Column(db.String(20), nullable=False)
     sname = db.Column(db.String(20), nullable=False)
-    password_hash = db.Column(db.String(255), nullable=False)
+    hashed_password = db.Column(db.String(120), nullable=False)
     email = db.Column(db.String(120),unique=True, nullable=False)
 
-    def set_password(self, password):
-        self.password_hash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
-
-    def check_password(self, input_password):
-        return bcrypt.checkpw(input_password.encode('utf-8'), self.password_hash.encode('utf-8'))
+    def get_user_by_id(user_id):
+        return users.query.get(int(user_id))
 
 class ContactMessage(db.Model):
     id = db.Column(db.Integer, primary_key=True)
