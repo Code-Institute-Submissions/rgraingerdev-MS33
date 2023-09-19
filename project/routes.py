@@ -1,9 +1,9 @@
 from flask import Flask, render_template, url_for, request, redirect, flash
-from flask_login import login_user, logout_user, LoginManager, current_user, UserMixin
+from flask_login import login_user, logout_user, LoginManager, current_user, UserMixin, login_required
 from flask_sqlalchemy import SQLAlchemy
 from project import app, db
 from sqlalchemy import text
-from project.models import users, message, ContactMessage
+from project.models import users, reviews, ContactMessage
 import bcrypt
 from bcrypt import hashpw, gensalt, checkpw
 
@@ -13,17 +13,6 @@ login_manager.login_view = 'signin'
 @app.route("/")
 def home():
     return render_template("home.html", home=home)
-
-@app.route("/create_message", methods=["GET", "POST"])
-def create_message():
-    if request.method == "POST":
-        content = request.form["content"]
-        user = current_user
-        new_message = message(content=content, user=user)
-        db.session.add(new_message)
-        db.session.commit()
-        return redirect(url_for("messages"))
-    return render_template("create_message.html", create_message=create_message)
 
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
@@ -39,15 +28,27 @@ def contact():
 
     return render_template("contact.html", contact=contact)
 
+@app.route("/timetable")
+@login_required
+def timetable():
+    return render_template("timetable.html", timetable=timetable)
+
+@app.route("/create_message", methods=["GET", "POST"])
+def create_message():
+    if request.method == 'POST':
+
+        content = request.form.get("content")
+
+        new_message = reviews(content=content, user_id=current_user.id)
+        db.session.add(new_message)
+        db.session.commit()
+        return redirect(url_for("timetable"))
+    return render_template("timetable.html", timetable=timetable)
 
 @app.route("/view_messages")
 def view_messages():
     messages = ContactMessage.query.all()
     return render_template("view_messages.html", messages=messages)
-
-@app.route("/messages")
-def messages():
-    return render_template("messages.html", messages=messages)
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -89,8 +90,6 @@ def signin():
         flash("Login Unsuccessful", 'danger')
     return render_template("signin.html", title="Sign In", signin=signin)
             
-
-
 @app.route("/logout")
 def logout():
     logout_user()
