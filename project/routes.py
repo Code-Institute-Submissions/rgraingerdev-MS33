@@ -94,7 +94,7 @@ def signin():
 @app.route("/logout")
 def logout():
     logout_user()
-    return redirect(url_for("home.html"))
+    return redirect(url_for("home"))
 
 @app.route('/test-connection')
 def test_connection():
