@@ -14,3 +14,4 @@ postgres
 psycopg2-binary==2.9.6
 psycopg2-pool
 wheel
+flask_login
