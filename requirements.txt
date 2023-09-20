@@ -1,6 +1,6 @@
 click
 Flask
-Flask-SQLAlchemy
+Flask-SQLAlchemy==3.0.3
 greenlet
 itsdangerous
 Jinja2
