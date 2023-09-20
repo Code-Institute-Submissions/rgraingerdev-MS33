@@ -10,7 +10,7 @@ from bcrypt import hashpw, gensalt, checkpw
 login_manager = LoginManager(app)
 login_manager.login_view = 'signin'
 
-@app.route("/")
+@app.route("/home")
 def home():
     return render_template("home.html", home=home)
 
