@@ -3,7 +3,7 @@ from flask_login import login_user, logout_user, LoginManager, current_user, Use
 from flask_sqlalchemy import SQLAlchemy
 from project import app, db
 from sqlalchemy import text
-from project.models import users, reviews, ContactMessage
+from project.models import users, reviews, ContactMessage, lessons
 import bcrypt
 from bcrypt import hashpw, gensalt, checkpw
 
@@ -35,31 +35,9 @@ def timetable():
 
 @app.route("/reviews")
 def display_reviews():
-    review = reviews.query.join(users).add_columns(users.fname, reviews.content).all()
+    review = reviews.query.join(users).add_columns(users.fname, reviews.content, reviews.id).all()
     return render_template("reviews.html", review=review)
-
-@app.route("/edit_review/<int:review_id>")
-def edit_review(review_id):
-    if request.method == 'POST':
-        new_content = request.form.get("content")
-        review = reviews.query.get(review_id)
-        review.content = new_content
-
-    review = reviews.get(review_id)
-    if review:
-        return render_template("edit_review.html", review=review)
-    else:
-        return f"Review with id={review_id} not found"
-    return render_template("edit_review.html", review=review)
-
-@app.route("/delete_review/<int:review_id>")
-def delete_review(review_id):
-    review = reviews.query.get_or_404(review_id)
-    db.session.delete(review)
-    db.session.commit()
-    return redirect(url_for("display_reviews"))
-
-
+    
 @app.route("/create_message", methods=["GET", "POST"])
 def create_message():
     if request.method == 'POST':
@@ -71,6 +49,25 @@ def create_message():
         db.session.commit()
         return redirect(url_for("timetable"))
     return render_template("timetable.html", timetable=timetable)
+
+
+@app.route("/edit_review/<int:review_id>", methods=["GET", "POST"] ) 
+def edit_review(review_id):
+    review = reviews.query.get_or_404(review_id)
+    if request.method == 'POST':
+        review.content = request.form.get("content")
+        db.session.commit()
+        return redirect(url_for("timetable"))
+    return render_template("edit_review.html", review=review)
+
+@app.route("/delete_review/<int:review_id>")
+def delete_review(review_id):
+    review= reviews.query.get_or_404(review_id)
+
+    if review:
+        db.session.delete(review)
+        db.session.commit()
+        return redirect(url_for('timetable'))
 
 @app.route("/view_messages")
 def view_messages():

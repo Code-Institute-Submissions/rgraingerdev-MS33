@@ -25,12 +25,17 @@ class ContactMessage(db.Model):
     subject = db.Column(db.String(60), nullable=False)
     message = db.Column(db.Text, nullable = False)
 
+class lessons(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    days_lesson = db.Column(db.Text, nullable=False)
+    review = db.relationship("reviews", backref="lesson", cascade="all, delete", lazy=True)
+
 class reviews(db.Model):
-    __tablename__ = 'reviews'
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
     user = relationship("users", backref="reviews")
+    review_id = db.Column(db.Integer, db.ForeignKey("lessons.id", ondelete="CASCADE"), nullable=False)
 
 
 
