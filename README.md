@@ -4,7 +4,7 @@ Welcome To the Developer Friends Page, The Developer friends and everything it s
 
 ## Getting Started
 
-Visit https://rgraingerdev.github.io/MS£/ on your preferred web browser to access the Developer friends Page. The website is completely responsive; regardless of whether you're using a desktop computer, tablet or smartphone, it should look excellent on all of them.
+Visit https://developerfriends-847f79cf6af3.herokuapp.com/ on your preferred web browser to access the Developer friends Page. The website is completely responsive; regardless of whether you're using a desktop computer, tablet or smartphone, it should look excellent on all of them.
 
 ## User Storys
 I have developed user stories to direct my design and development process; in order to make sure that the Developer friends Page satisfies the requirements of my users. Here are some usage examples for user stories:
@@ -81,17 +81,11 @@ Testing began with automated testing as per the table below with screenshots.
 |Contact| Pass| Pass| Pass|
 |Sign in| Pass | Pass| Pass|
 
-![Home](assets/Screenshots/validator_home.png)  
+![Home](project\static\images\validator_timetable.png)  
 
-![Home](assets/Screenshots/validator_history.png)  
+![Home](project\static\images\validator_timetable.png)  
 
-![Home](assets/Screenshots/validator_season.png)  
-
-![Home](assets/Screenshots/validator_contact.png)  
-
-![Home](assets/Screenshots/lighthuse_desktop.png)
-
-![Home](assets/Screenshots/Lighthouse-testing.png)
+![Home](project\static\images\validator_timetable.png)  
 
 ### Manual testing
 
@@ -161,18 +155,12 @@ Testing began with automated testing as per the table below with screenshots.
 
 Continuing with testing, I tested the page across multiple devices (iPhone, Galaxy Fold, Edge and Firefox) ensuring all links and pages loaded all elements correctly and promptly.
 
-![iphone home](assets/Screenshots/iphone_home.png)  
+![iphone home](project\static\images\iphone_timetable.png)  
 
 
-![fold contact](assets/Screenshots/fold_contact.png) 
+![fold contact](project\static\images\galaxyfold.png) 
 
-![Fold open history](assets/Screenshots/fold_open_history.png)
-
-
-![Desktop Home](assets/Screenshots/desktop_dis_home.png)
-
-
-![Firefox Home](assets/Screenshots/firefox_season.png)  
+![Fold open history](project\static\images\ipad.png)
 
 
 ### known bugs
@@ -184,13 +172,14 @@ Bugs found during writing have been fixed.
 * User no action on sign in invalid salt - added a decrypt into initial password encrypt
 * Unable to edit reviews no review_id - added review_id into function
 
-## Deployment
-1. Navigate to the [repository](https://github.com/rgraingerdev/MS3)
-2. Click on Settings on the top.
-3. Click on Pages on the menu on the left which will open GitHub Pages window.
-4. From the drop-down menu under source select deploy from branch.
-5. From the drop-down menu under branch select main, this tells GitHub which branch to use for the deployment. Click Save.
-6. The page should refresh, and the deployment link should appear.
+## Deployment from github repository to Heroku
+1. At the heroku dashboard, click "New" and the select create new app
+2. Chouse a unique name for your app 
+3. Under "Deployment method" section, select github
+4. Connect your Heroku app to your Github repositry by searching for and selecting the repo.
+5. Choose a branch to deploy.
+6. Click "Enable automatic deplys" to allow heroku to redeploy the app when changes are pushed.
+7. Click Deploy branch.
 
 ## Creating a fork
 1. Navigate to the [repository](https://github.com/rgraingerdev/MS3)
@@ -205,12 +194,6 @@ Bugs found during writing have been fixed.
 3. Open Git Bash and change the working directory to the location where you want the cloned directory. 
 4. Type git clone and then paste the link.
 5. Press Enter to create your local clone.
-
-## Sources
-none
-
-### images from:
-
 
 ## Acknowledgements
 * Thank you to my mentor for supporting me through this project
