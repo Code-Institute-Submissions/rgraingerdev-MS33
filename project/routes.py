@@ -119,14 +119,6 @@ def logout():
     logout_user()
     return redirect(url_for("home"))
 
-@app.route('/test-connection')
-def test_connection():
-    try:
-        count = text('SELECT * FROM users')
-        return f"Connection successful! Total records: {count}"
-    except Exception as e:
-        return f"Connection failed: {str(e)}"
-    
 
 
 
