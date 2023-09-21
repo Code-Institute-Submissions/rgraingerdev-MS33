@@ -77,7 +77,7 @@ Testing began with automated testing as per the table below with screenshots.
 |Test |Lighthouse| W3 html validator| W3 schools jigsaw| 
 |-----|-----|-----|-----|
 |home| Pass| Pass| Pass|
-|About| Pass| Pass| Pass|
+|Timeline| Pass| Pass| Pass|
 |Contact| Pass| Pass| Pass|
 |Sign in| Pass | Pass| Pass|
 
@@ -95,7 +95,7 @@ Testing began with automated testing as per the table below with screenshots.
 
 ### Manual testing
 
-#### Home page
+#### Home
 
 | Feature | Expect | Action | Result | Pass/Fail |
 |-----|-----|-----|-----|-----|
@@ -104,7 +104,7 @@ Testing began with automated testing as per the table below with screenshots.
 |Social link icons | Social link icons to open links in new tab| clicked social link icons| Link opened in new tab and on correct site| Pass|
 |Menu Drop down | To drop down on mobile and tablet devices | opened on mutiple devices and pressed button | menu droped and displayed correctly| Pass|
 
-#### About
+#### Timetable
 
 | Feature | Expect | Action | Result | Pass/Fail |
 |-----|-----|-----|-----|-----|
@@ -112,8 +112,18 @@ Testing began with automated testing as per the table below with screenshots.
 |Menu Drop down | To drop down on mobile and tablet devices | opened on mutiple devices and pressed button | menu droped and displayed correctly| Pass|
 |Social link icons | Social link icons to open links in new tab| clicked social link icons| Link opened in new tab and on correct site| Pass|
 |Contact form | To  submit for when inputs are filled | left form blank and attempted submit/filled form and submitted | prompted to fill input boxes/ submitted to input page| Pass|
-|return home button | to navigate back to history page after form submission | clicked return home button | returned to history page | Pass |
+|Review Commit| when clicked submit information to table| tried to complete with no input will not allow attempted with input commited to postgres| Pass
+|Reviews link | when clicked navigate to page | Clicked on link | reviews pageopened | Pass
 
+### Reviews
+| Feature | Expect | Action | Result | Pass/Fail |
+|-----|-----|-----|-----|-----|
+|Nav links | When clicked navigate to page | Clicked all nav links on all pages| All pages opened as expected| Pass
+|Menu Drop down | To drop down on mobile and tablet devices | opened on mutiple devices and pressed button | menu droped and displayed correctly| Pass|
+|Social link icons | Social link icons to open links in new tab| clicked social link icons| Link opened in new tab and on correct site| Pass|
+|Displays reviews| Displaying reviews from proper tables| Displaying review_id and contents| pulled from correct table| Pass
+|Edit link| opens review editor| Clicked link | Navigated to review editor correctly | Pass
+|Delete link| Removes review | Clicked link | Removed review as expected | Pass
 
 #### Contact
 
@@ -122,6 +132,8 @@ Testing began with automated testing as per the table below with screenshots.
 |Nav links | When clicked navigate to page | Clicked all nav links on all pages| All pages opened as expected| Pass
 |Menu Drop down | To drop down on mobile and tablet devices | opened on mutiple devices and pressed button | menu droped and displayed correctly| Pass|
 |Social link icons | Social link icons to open links in new tab| clicked social link icons| Link opened in new tab and on correct site| Pass|
+|Input boxes| Not allow form submited blank| Attempted to submit with no information| prompted to fill in boxes| pass
+|Input form| Pass information to postgres| Filled in form and submitted| checked information been inputed on correct table| Pass
 
 #### Sign in
 
@@ -130,9 +142,9 @@ Testing began with automated testing as per the table below with screenshots.
 |Nav links | When clicked navigate to page | Clicked all nav links on all pages| All pages opened as expected| Pass
 |Menu Drop down | To drop down on mobile and tablet devices | opened on mutiple devices and pressed button | menu droped and displayed correctly| Pass|
 |Social link icons | Social link icons to open links in new tab| clicked social link icons| Link opened in new tab and on correct site| Pass|
-|Ticket buttons | to open in new tab on ticket office | clicked ticket buttons | navigated to ticket office in new tab| Pass |
-|Season badge button | To open CCFC wiki in new tab | clicked the button | opened CCFC wiki in new tab| Pass|
-|Map | To display a map to stadium | opened in multiple browsers and devices | displayed correctly| Pass|
+|Form submission| Does not allow sign in without sign up| input invalid credentials| did not allow sign in| Pass
+|Form submission| Allows sign in with correct credentials| Input valid credentials| Sign in successful| Pass
+
 
 #### Sign up
 
@@ -141,9 +153,10 @@ Testing began with automated testing as per the table below with screenshots.
 |Nav links | When clicked navigate to page | Clicked all nav links on all pages| All pages opened as expected| Pass
 |Menu Drop down | To drop down on mobile and tablet devices | opened on mutiple devices and pressed button | menu droped and displayed correctly| Pass|
 |Social link icons | Social link icons to open links in new tab| clicked social link icons| Link opened in new tab and on correct site| Pass|
-|Ticket buttons | to open in new tab on ticket office | clicked ticket buttons | navigated to ticket office in new tab| Pass |
-|Season badge button | To open CCFC wiki in new tab | clicked the button | opened CCFC wiki in new tab| Pass|
-|Map | To display a map to stadium | opened in multiple browsers and devices | displayed correctly| Pass|
+|Form submission| Does not allow empty or invalid input| Input invalid informatian| did not allow sign up| Pass
+|Form submission| Allows sign up with proper information| Input correct information| Allowed sign up | Pass
+|Credential storage| Stores credentials in correct tables| Submitted input| Checked postgre table for information| Pass
+
 
 
 Continuing with testing, I tested the page across multiple devices (iPhone, Galaxy Fold, Edge and Firefox) ensuring all links and pages loaded all elements correctly and promptly.
@@ -168,9 +181,11 @@ Bugs found during writing have been fixed.
 * Not registering user signed in - Resolved by implementing Flask login manager
 * Not posting message to SQL table - Resolved recreated the SQL table to reflect fields
 * Footer not sticking to bottom of page - resolved by re-applying CSS
+* User no action on sign in invalid salt - added a decrypt into initial password encrypt
+* Unable to edit reviews no review_id - added review_id into function
 
 ## Deployment
-1. Navigate to the [repository](https://github.com/rgraingerdev/Milestone-project)
+1. Navigate to the [repository](https://github.com/rgraingerdev/MS3)
 2. Click on Settings on the top.
 3. Click on Pages on the menu on the left which will open GitHub Pages window.
 4. From the drop-down menu under source select deploy from branch.
@@ -178,14 +193,14 @@ Bugs found during writing have been fixed.
 6. The page should refresh, and the deployment link should appear.
 
 ## Creating a fork
-1. Navigate to the [repository](https://github.com/rgraingerdev/Milestone-project)
+1. Navigate to the [repository](https://github.com/rgraingerdev/MS3)
 2. In the top-right corner of the page click on the fork button and select create a fork.
 3. You can change the name of the fork and add description 
 4. Choose to copy only the main branch or all branches to the new fork. 
 5. Click Create a Fork. A repository should appear in your GitHub.
 
 ### Cloning Repository
-1. Navigate to the [repository](https://github.com/rgraingerdev/Milestone-project)
+1. Navigate to the [repository](https://github.com/rgraingerdev/MS3)
 2. Click on the Code button on top of the repository and copy the link. 
 3. Open Git Bash and change the working directory to the location where you want the cloned directory. 
 4. Type git clone and then paste the link.
