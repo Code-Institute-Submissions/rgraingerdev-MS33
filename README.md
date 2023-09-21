@@ -81,7 +81,7 @@ Testing began with automated testing as per the table below with screenshots.
 |Contact| Pass| Pass| Pass|
 |Sign in| Pass | Pass| Pass|
 
-![Home](static\images\validator_home.png)  
+![Home](static/images/validator_home.png)  
 
 ![Home](\static\images\validator_timetable.png)  
 
