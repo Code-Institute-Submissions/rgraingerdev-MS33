@@ -35,7 +35,7 @@ By developing user stories, I can make sure that the website satisfies user need
 ### Font
 
 * Inter was the font I chose. The typeface was picked because it is slick and simple for the end user to read, additionally it comes from Google Fonts.
-* ![wireframe](assets/Screenshots/Quicksand_font.png)
+* ![wireframe](project/static/images/font_inter.png)
 
 ## Wireframes
 * I began my project with wireframing my design below:
@@ -83,9 +83,9 @@ Testing began with automated testing as per the table below with screenshots.
 
 ![Home](project/static/images/validator_home.png)  
 
-![Home](\static\images\validator_timetable.png)  
+![Home](project/static/images/validator_timetable.png)  
 
-![Home](.\static\images\validator_signin.png)  
+![Home](project/static/images/validator_signin.png)  
 
 ### Manual testing
 
@@ -155,12 +155,12 @@ Testing began with automated testing as per the table below with screenshots.
 
 Continuing with testing, I tested the page across multiple devices (iPhone, Galaxy Fold, Edge and Firefox) ensuring all links and pages loaded all elements correctly and promptly.
 
-![iphone home](static\images\iphone_timetable.png)  
+![iphone home](project/static/images/iphone_timetable.png)  
 
 
-![fold contact](static\images\galaxyfold.png) 
+![fold contact](project/static/images/galaxyfold.png) 
 
-![Fold open history](static\images\ipad.png)
+![Fold open history](project/static/images/ipad.png)
 
 
 ### known bugs
