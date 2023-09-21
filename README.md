@@ -81,11 +81,11 @@ Testing began with automated testing as per the table below with screenshots.
 |Contact| Pass| Pass| Pass|
 |Sign in| Pass | Pass| Pass|
 
-![Home](project\static\images\validator_timetable.png)  
+![Home](static\images\validator_home.png)  
 
-![Home](project\static\images\validator_timetable.png)  
+![Home](\static\images\validator_timetable.png)  
 
-![Home](project\static\images\validator_timetable.png)  
+![Home](.\static\images\validator_signin.png)  
 
 ### Manual testing
 
@@ -155,12 +155,12 @@ Testing began with automated testing as per the table below with screenshots.
 
 Continuing with testing, I tested the page across multiple devices (iPhone, Galaxy Fold, Edge and Firefox) ensuring all links and pages loaded all elements correctly and promptly.
 
-![iphone home](.\static\images\iphone_timetable.png)  
+![iphone home](static\images\iphone_timetable.png)  
 
 
-![fold contact](.\static\images\galaxyfold.png) 
+![fold contact](static\images\galaxyfold.png) 
 
-![Fold open history](.\static\images\ipad.png)
+![Fold open history](static\images\ipad.png)
 
 
 ### known bugs
