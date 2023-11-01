@@ -8,6 +8,7 @@ from project import db
 
 class Users(UserMixin, db.Model):
     """Creates user table"""
+    __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     fname = db.Column(db.String(20), nullable=False)
     sname = db.Column(db.String(20), nullable=False)
@@ -30,12 +31,14 @@ class ContactMessage(db.Model):
 
 class Lessons(db.Model):
     """Creates lesson table"""
+    __tablename__ = 'lessons'
     id = db.Column(db.Integer, primary_key=True)
     days_lesson = db.Column(db.Text, nullable=False)
     review = db.relationship("Reviews", backref="Lessons", cascade="all, delete", lazy=True)
 
 class Reviews(db.Model):
     """creates review table"""
+    __tablename__ = 'reviews'
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('Users.id'), nullable = False)
