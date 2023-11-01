@@ -29,13 +29,6 @@ class ContactMessage(db.Model):
     subject = db.Column(db.String(60), nullable=False)
     message = db.Column(db.Text, nullable = False)
 
-class Lessons(db.Model):
-    """Creates lesson table"""
-    __tablename__ = 'lessons'
-    id = db.Column(db.Integer, primary_key=True)
-    days_lesson = db.Column(db.Text, nullable=False)
-    Reviews = db.relationship("Reviews", backref="Lessons", cascade="all, delete", lazy=True)
-
 class Reviews(db.Model):
     """creates review table"""
     __tablename__ = 'reviews'
@@ -43,11 +36,6 @@ class Reviews(db.Model):
     content = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('Users.id'), nullable = False)
     user = relationship("Users", backref="Reviews")
-    review_id = db.Column(
-        db.Integer, db.ForeignKey("Lessons.id", ondelete="CASCADE"), nullable=False
-        )
-
-
 
 if __name__ == "__main__":
     print("Creating Database Tables...")
