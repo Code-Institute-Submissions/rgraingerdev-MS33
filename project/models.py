@@ -34,7 +34,7 @@ class Lessons(db.Model):
     __tablename__ = 'lessons'
     id = db.Column(db.Integer, primary_key=True)
     days_lesson = db.Column(db.Text, nullable=False)
-    review = db.relationship("Reviews", backref="Lessons", cascade="all, delete", lazy=True)
+    Reviews = db.relationship("Reviews", backref="Lessons", cascade="all, delete", lazy=True)
 
 class Reviews(db.Model):
     """creates review table"""
