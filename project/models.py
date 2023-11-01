@@ -40,7 +40,7 @@ class Reviews(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
-    user = relationship("users", backref="reviews")
+    user = relationship("users", backref="Reviews")
     review_id = db.Column(
         db.Integer, db.ForeignKey("Lessons.id", ondelete="CASCADE"), nullable=False
         )
