@@ -1,11 +1,9 @@
 """Defines routes and uses of pages"""
-from flask import Flask, render_template, url_for, request, redirect, flash
+from flask import render_template, url_for, request, redirect, flash
 from flask_login import (login_user, logout_user,
-                         LoginManager,current_user,UserMixin,login_required)
-from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import text
+                         LoginManager,current_user,login_required)
 import bcrypt
-from bcrypt import hashpw, gensalt, checkpw
+from bcrypt import checkpw
 from project.models import Users, Reviews, ContactMessage
 from project import app, db
 
