@@ -35,7 +35,7 @@ class Reviews(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('Users.id'), nullable = False)
-    user = relationship("Users", backref="Reviews")
+    user = relationship("Users", backref="Reviews", primaryjoin="Users.id == Reviews.user_id")
 
 if __name__ == "__main__":
     print("Creating Database Tables...")

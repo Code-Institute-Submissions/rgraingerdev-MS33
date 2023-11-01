@@ -9,9 +9,6 @@ from bcrypt import hashpw, gensalt, checkpw
 from project.models import Users, Reviews, ContactMessage
 from project import app, db
 
-
-
-
 login_manager = LoginManager(app)
 login_manager.login_view = 'signin'
 
