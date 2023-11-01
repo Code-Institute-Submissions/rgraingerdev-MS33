@@ -172,6 +172,57 @@ Bugs found during writing have been fixed.
 * User no action on sign in invalid salt - added a decrypt into initial password encrypt
 * Unable to edit reviews no review_id - added review_id into function
 
+## Local Development
+
+To develop this repository locally, you will need to do the following:
+
+1. Install PostgreSQL (Version 15), though with modification to the DB_URI env key you can use another relational
+   database.
+2. Install Python (Version 3.10).
+3. Clone this repository.
+    - This can be done by either using `git clone https://github.com/rgraingerdev/MS3` in
+      the terminal, or by using GitHub Desktop.
+4. Create a virtual environment.
+    - This can be done by using `python -m venv venv` in the terminal.
+    - The purpose of a virtual environment is to keep the dependencies for this project separate from other projects.
+5. Activate the virtual environment.
+    - This can be done by using `source venv/bin/activate` in the terminal.
+6. Install program requirements.
+    - This can be done by using `pip install -r requirements.txt` in the terminal.
+7. Create a `.gitignore` file and add `env.py` to it.
+8. Create the env.py file in the root of your project directory.
+9. Add the following to env.py
+
+- ```python
+   import os
+
+   # Set IP for Flask Server - 0.0.0.0 uses all IPs on Device
+   os.environ.setdefault("IP", "0.0.0.0")
+        
+   # Set Port for Flask Server - 5000 is common but interferes with Airport on macOS
+   os.environ.setdefault("PORT", "5555")
+        
+   # Set Debug to True - Enables development server for Flask
+   # Remove this key before deploying to production
+   os.environ.setdefault("DEBUG", "True")
+        
+   # Set SECRET_KEY for Flask Flashes
+   os.environ.setdefault("SECRET_KEY", "<SECRET_KEY>")
+        
+   # Database Connection String
+   os.environ.setdefault("DB_URI", "postgresql://user:password@hostname/database_name")
+
+10. Run the app.py file.
+    - This can be done by using `python app.py` in the terminal.
+
+## ElephantSQL
+
+1. Logged into ElephantSQL via GitHub.
+2. Selected 'Create New Instance'.
+3. Named DB 'Developer_friends' and selected 'Tiny Turtle' plan.
+4. Selected Region.
+5. Confirm creation.
+
 ## Deployment from github repository to Heroku
 1. At the heroku dashboard, click "New" and the select create new app
 2. Chouse a unique name for your app 
