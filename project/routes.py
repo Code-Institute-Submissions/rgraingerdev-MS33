@@ -47,7 +47,7 @@ def timetable():
 @app.route("/reviews")
 def display_reviews():
     """shows review"""
-    review = reviews.query.join(users).add_columns(users.fname, reviews.content, reviews.id).all()
+    review = Reviews.query.join(Users).add_columns(Users.fname, Reviews.content, Reviews.id).all()
     return render_template("reviews.html", review=review)
 
 
@@ -58,7 +58,7 @@ def create_message():
 
         content = request.form.get("content")
 
-        new_message = reviews(content=content, user_id=current_user.id)
+        new_message = Reviews(content=content, user_id=current_user.id)
         db.session.add(new_message)
         db.session.commit()
         return redirect(url_for("timetable"))
@@ -67,7 +67,7 @@ def create_message():
 @app.route("/edit_review/<int:review_id>", methods=["GET", "POST"])
 def edit_review(review_id):
     """renders review edit"""
-    review = reviews.query.get_or_404(review_id)
+    review = Reviews.query.get_or_404(review_id)
     if request.method == 'POST':
         review.content = request.form.get("content")
         db.session.commit()
@@ -77,7 +77,7 @@ def edit_review(review_id):
 @app.route("/delete_review/<int:review_id>")
 def delete_review(review_id):
     """deletes review"""
-    review = reviews.query.get_or_404(review_id)
+    review = Reviews.query.get_or_404(review_id)
 
     if review:
         db.session.delete(review)
@@ -93,7 +93,7 @@ def view_messages():
 @login_manager.user_loader
 def load_user(user_id):
     """loads user details"""
-    return users.query.get(int(user_id))
+    return Users.query.get(int(user_id))
 
 @app.route('/signup', methods=["GET", "POST"])
 def signup():
@@ -107,7 +107,7 @@ def signup():
         pwhash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
         hashed_password = pwhash.decode('utf-8')
 
-        new_user = users(fname=fname, sname=sname, email=email, hashed_password=hashed_password)
+        new_user = Users(fname=fname, sname=sname, email=email, hashed_password=hashed_password)
 
         db.session.add(new_user)
         db.session.commit()
@@ -124,7 +124,7 @@ def signin():
         email = request.form.get("email")
         password = request.form.get("password")
 
-        user = users.query.filter(users.email == email).first()
+        user = Users.query.filter(Users.email == email).first()
 
         if user and checkpw(password.encode('utf-8'), user.hashed_password.encode('utf-8')):
             login_user(user)
