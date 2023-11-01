@@ -21,7 +21,7 @@
             <li><a href={{ url_for('home') }}>Home</a></li>
             <li><a href={{ url_for('timetable') }}>Timetable</a></li>
             <li><a href={{ url_for('contact') }}>Contact</a></li>
-            <li><a href={{ url_for('reviews') }}>Reviews</a></li>
+            <li><a href={{ url_for('display_reviews') }}>Reviews</a></li>
             {% if current_user.is_authenticated %}
                 <li><a href={{ url_for('logout') }}>Logout</a></li>
             {% else %}
@@ -35,7 +35,7 @@
         <li><a href={{ url_for('home') }}>Home</a></li>
         <li><a href={{ url_for('timetable') }}>Timetable</a></li>
         <li><a href={{ url_for('contact') }}>Contact</a></li>
-        <li><a href={{ url_for('reviews') }}>Reviews</a></li>
+        <li><a href={{ url_for('display_reviews') }}>Reviews</a></li>
         {% if current_user.is_authenticated %}
                 <li><a href={{ url_for('logout') }}>Logout</a></li>
             {% else %}
