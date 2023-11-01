@@ -6,7 +6,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 import bcrypt
 from bcrypt import hashpw, gensalt, checkpw
-from project.models import Users, Reviews, ContactMessage, Lessons
+from project.models import Users, Reviews, ContactMessage
 from project import app, db
 
 
