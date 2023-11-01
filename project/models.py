@@ -8,7 +8,6 @@ from project import db
 
 class Users(UserMixin, db.Model):
     """Creates user table"""
-    __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     fname = db.Column(db.String(20), nullable=False)
     sname = db.Column(db.String(20), nullable=False)
@@ -40,7 +39,7 @@ class Reviews(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('Users.id'), nullable = False)
-    user = relationship("users", backref="Reviews")
+    user = relationship("Users", backref="Reviews")
     review_id = db.Column(
         db.Integer, db.ForeignKey("Lessons.id", ondelete="CASCADE"), nullable=False
         )
