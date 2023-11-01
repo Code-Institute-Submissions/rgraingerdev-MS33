@@ -7,8 +7,8 @@
                     <div class="comment-card">
                         <ul>
                             <li>{{ content.content }}</li>
-                            <a href="{{url_for('edit_review', review_id=content.id)}}">edit</a>
-                            <a href="{{url_for('delete_review', review_id=content.id)}}">Delete</a>
+                            <li href="{{url_for('edit_review', review_id=content.id)}}">edit</li>
+                            <li href="{{url_for('delete_review', review_id=content.id)}}">Delete</li>
                         </ul>
                     </div>
                 {% endfor %}
