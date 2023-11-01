@@ -33,7 +33,7 @@ class Lessons(db.Model):
     """Creates lesson table"""
     id = db.Column(db.Integer, primary_key=True)
     days_lesson = db.Column(db.Text, nullable=False)
-    review = db.relationship("reviews", backref="lesson", cascade="all, delete", lazy=True)
+    review = db.relationship("Reviews", backref="lesson", cascade="all, delete", lazy=True)
 
 class Reviews(db.Model):
     """creates review table"""
@@ -42,7 +42,7 @@ class Reviews(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
     user = relationship("users", backref="reviews")
     review_id = db.Column(
-        db.Integer, db.ForeignKey("lessons.id", ondelete="CASCADE"), nullable=False
+        db.Integer, db.ForeignKey("Lessons.id", ondelete="CASCADE"), nullable=False
         )
 
 
