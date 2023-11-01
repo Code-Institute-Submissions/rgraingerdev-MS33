@@ -1,11 +1,13 @@
-from project import db
+"""Table modles creation"""
 from flask_login import UserMixin, LoginManager
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import relationship
 import bcrypt
+from project import db
 
 
-class users(UserMixin, db.Model):
+class Users(UserMixin, db.Model):
+    """Creates user table"""
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     fname = db.Column(db.String(20), nullable=False)
@@ -14,10 +16,12 @@ class users(UserMixin, db.Model):
     email = db.Column(db.String(120),unique=True, nullable=False)
 
 
-    def get_user_by_id(user_id):
-        return users.query.get(int(user_id))
+    def get_user_by_id(self, user_id):
+        """returns user id"""
+        return Users.query.get(int(user_id))
 
 class ContactMessage(db.Model):
+    """Creates contact table"""
     id = db.Column(db.Integer, primary_key=True)
     fname = db.Column(db.String(20), nullable=False)
     sname = db.Column(db.String(20), nullable=False)
@@ -25,17 +29,21 @@ class ContactMessage(db.Model):
     subject = db.Column(db.String(60), nullable=False)
     message = db.Column(db.Text, nullable = False)
 
-class lessons(db.Model):
+class Lessons(db.Model):
+    """Creates lesson table"""
     id = db.Column(db.Integer, primary_key=True)
     days_lesson = db.Column(db.Text, nullable=False)
     review = db.relationship("reviews", backref="lesson", cascade="all, delete", lazy=True)
 
-class reviews(db.Model):
+class Reviews(db.Model):
+    """creates review table"""
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.Text, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable = False)
     user = relationship("users", backref="reviews")
-    review_id = db.Column(db.Integer, db.ForeignKey("lessons.id", ondelete="CASCADE"), nullable=False)
+    review_id = db.Column(
+        db.Integer, db.ForeignKey("lessons.id", ondelete="CASCADE"), nullable=False
+        )
 
 
 
@@ -43,6 +51,3 @@ if __name__ == "__main__":
     print("Creating Database Tables...")
     db.create_all()
     print("Done!")
-
-
-
