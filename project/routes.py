@@ -1,7 +1,7 @@
 """Defines routes and uses of pages"""
 from flask import render_template, url_for, request, redirect, flash
 from flask_login import (login_user, logout_user,
-                         LoginManager,current_user,login_required)
+                         LoginManager, current_user, login_required)
 import bcrypt
 from bcrypt import checkpw
 from project.models import Users, Reviews, ContactMessage
@@ -16,6 +16,7 @@ def home():
     """renders homepage"""
     return render_template("home.html", home=home)
 
+
 @app.route("/contact", methods=["GET", "POST"])
 def contact():
     """renders contact form"""
@@ -26,12 +27,14 @@ def contact():
         subject = request.form.get("subject")
         message = request.form.get("message")
         new_message = ContactMessage(
-            fname=fname, sname=sname, email=email, subject=subject, message=message
+            fname=fname, sname=sname, email=email,
+            subject=subject, message=message
             )
         db.session.add(new_message)
         db.session.commit()
 
     return render_template("contact.html", contact=contact)
+
 
 @app.route("/timetable")
 @login_required
@@ -39,10 +42,13 @@ def timetable():
     """renders Timeline page"""
     return render_template("timetable.html", timetable=timetable)
 
+
 @app.route("/reviews")
 def display_reviews():
     """shows review"""
-    review = Reviews.query.join(Users).add_columns(Users.fname, Reviews.content, Reviews.id).all()
+    review = Reviews.query.join(Users).add_columns(
+        Users.fname, Reviews.content, Reviews.id
+        ).all()
     return render_template("reviews.html", review=review)
 
 
@@ -59,6 +65,7 @@ def create_message():
         return redirect(url_for("timetable"))
     return render_template("timetable.html", timetable=timetable)
 
+
 @app.route("/edit_review/<int:review_id>", methods=["GET", "POST"])
 def edit_review(review_id):
     """renders review edit"""
@@ -68,6 +75,7 @@ def edit_review(review_id):
         db.session.commit()
         return redirect(url_for("timetable"))
     return render_template("edit_review.html", review=review)
+
 
 @app.route("/delete_review/<int:review_id>")
 def delete_review(review_id):
@@ -79,16 +87,19 @@ def delete_review(review_id):
         db.session.commit()
         return redirect(url_for('timetable'))
 
+
 @app.route("/view_messages")
 def view_messages():
     """view contacts mate to site owner"""
     messages = ContactMessage.query.all()
     return render_template("view_messages.html", messages=messages)
 
+
 @login_manager.user_loader
 def load_user(user_id):
     """loads user details"""
     return Users.query.get(int(user_id))
+
 
 @app.route('/signup', methods=["GET", "POST"])
 def signup():
@@ -102,7 +113,10 @@ def signup():
         pwhash = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt())
         hashed_password = pwhash.decode('utf-8')
 
-        new_user = Users(fname=fname, sname=sname, email=email, hashed_password=hashed_password)
+        new_user = Users(
+            fname=fname, sname=sname,
+            email=email, hashed_password=hashed_password
+            )
 
         db.session.add(new_user)
         db.session.commit()
@@ -111,6 +125,7 @@ def signup():
         return redirect(url_for("signin"))
 
     return render_template('signup.html', title="Sign Up", signup=signup)
+
 
 @app.route("/signin", methods=["GET", "POST"])
 def signin():
@@ -121,12 +136,15 @@ def signin():
 
         user = Users.query.filter(Users.email == email).first()
 
-        if user and checkpw(password.encode('utf-8'), user.hashed_password.encode('utf-8')):
+        if user and checkpw(
+            password.encode('utf-8'), user.hashed_password.encode('utf-8')
+        ):
             login_user(user)
             flash("Login Successful", 'success')
             return redirect(url_for("timetable"))
         flash("Login Unsuccessful", 'danger')
     return render_template("signin.html", title="Sign In", signin=signin)
+
 
 @app.route("/logout")
 def logout():
