@@ -117,7 +117,6 @@ def signup():
             fname=fname, sname=sname,
             email=email, hashed_password=hashed_password
             )
-
         db.session.add(new_user)
         db.session.commit()
 

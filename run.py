@@ -1,3 +1,5 @@
+'''run flask app'''
+
 import os
 from project import app
 
