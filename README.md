@@ -212,8 +212,8 @@ To develop this repository locally, you will need to do the following:
    # Database Connection String
    os.environ.setdefault("DB_URI", "postgresql://user:password@hostname/database_name")
 
-10. Run the app.py file.
-    - This can be done by using `python app.py` in the terminal.
+10. Run the run.py file.
+    - This can be done by using `python run.py` in the terminal.
 
 ## ElephantSQL
 
